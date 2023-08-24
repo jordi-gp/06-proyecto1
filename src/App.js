@@ -1,20 +1,23 @@
 import { Listado } from "./components/Listado";
 import { Buscador } from "./components/Buscador";
 import { Crear } from "./components/Crear";
+import { useState } from "react";
 
 function App() {
+  const [listState, setListState] = useState([]);
+
   return (
-    <div class='layout'>
+    <div className='layout'>
       {/*Cabecera*/}
-      <header class='header'>
-        <div class='logo'>
-          <div class='play'></div>
+      <header className='header'>
+        <div className='logo'>
+          <div className='play'></div>
         </div>
         <h1>Mis pelis</h1>
       </header>
 
       {/*Menú de navegación*/}
-      <nav class='nav'>
+      <nav className='nav'>
         <ul>
           <li>
             <a href='/#'>Inicio</a>
@@ -26,19 +29,19 @@ function App() {
       </nav>
 
       {/*Contenido principal*/}
-      <section class='content'>
+      <section className='content'>
         {/*Listado de peliculas*/}
-        <Listado />
+        <Listado listState={listState} setListState={setListState} />
       </section>
 
       {/*Barra lateral*/}
-      <aside class='lateral'>
+      <aside className='lateral'>
         <Buscador />
-        <Crear />
+        <Crear setListState={setListState} />
       </aside>
 
       {/*Footer de la página*/}
-      <footer class='footer'>
+      <footer className='footer'>
         &copy; Master en React y JavaScript
       </footer>
     </div>

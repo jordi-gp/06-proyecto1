@@ -1,47 +1,38 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 
-export const Listado = () => {
+export const Listado = ({listState, setListState}) => {
+
+  //const [listState, setListState] = useState([]);
+
+  /* Función que se ejecuta una sola vez al cargar la página
+  *  y que se encarga de obtener todas las peliculas del local
+  *  storage y las muestra como código HTML */
+  useEffect(() => {
+    console.log('Componente cargado correctamente');
+    getFilms();
+  }, []);
+
+  //Obtención de las peliculas
+  const getFilms = () => {
+    let films = JSON.parse(localStorage.getItem('films'));
+    setListState(films);
+  }
+
   return (
     <>
-        <article class='peli-item'>
-          <h3 class='titlte'>Desarrollo Web</h3>
-          <p class='description'>Curso de desarrollo web</p>
+      {listState != null ?
+        listState.map(film => {
+          return (
+            <article key={film.id} className='peli-item'>
+              <h3 className='titlte'>{film.title}</h3>
+              <p className='description'>{film.description}</p>
 
-          <button class='edit'>Editar</button>
-          <button class='delete'>Borrar</button>
-        </article>
-
-        <article class='peli-item'>
-          <h3 class='titlte'>Desarrollo Web</h3>
-          <p class='description'>Curso de desarrollo web</p>
-
-          <button class='edit'>Editar</button>
-          <button class='delete'>Borrar</button>
-        </article>
-
-        <article class='peli-item'>
-          <h3 class='titlte'>Desarrollo Web</h3>
-          <p class='description'>Curso de desarrollo web</p>
-
-          <button class='edit'>Editar</button>
-          <button class='delete'>Borrar</button>
-        </article>
-
-        <article class='peli-item'>
-          <h3 class='titlte'>Desarrollo Web</h3>
-          <p class='description'>Curso de desarrollo web</p>
-
-          <button class='edit'>Editar</button>
-          <button class='delete'>Borrar</button>
-        </article>
-
-        <article class='peli-item'>
-          <h3 class='titlte'>Desarrollo Web</h3>
-          <p class='description'>Curso de desarrollo web</p>
-
-          <button class='edit'>Editar</button>
-          <button class='delete'>Borrar</button>
-        </article>
+              <button className='edit'>Editar</button>
+              <button className='delete'>Borrar</button>
+            </article>
+          );
+        }): <h2>No hay peliculas disponibles</h2>
+      }
     </>
   )
 }

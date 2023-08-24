@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { GuardarEnStorage } from './helpers/GuardarEnStorage';
 
-export const Crear = () => {
+export const Crear = ({setListState}) => {
     const componentTitle = 'Añadir pelicula';
     const [filmState, setFilmState] = useState({
         title: '',
@@ -23,17 +23,22 @@ export const Crear = () => {
             title: filmTitle,
             description: filmDescription
         }
-
+        
         //Guardado del estado
         setFilmState(film);
 
+        //Actualización del estado del listado principal
+        setListState(elements => {
+            return[...elements, film]
+        });
+
         //Guardado en el LocalStorage
-        GuardarEnStorage('films', film);
+        GuardarEnStorage('films', film);        
     }
 
     return (
-        <div class='add'>
-            <h3 class='title'>{componentTitle}</h3>
+        <div className='add'>
+            <h3 className='title'>{componentTitle}</h3>
 
             {/*Confirmación a la hora de crear la pelicula*/}
             {(title && description) && 'Se ha creado la pelicula ' + title}
