@@ -16,6 +16,17 @@ export const Listado = ({listState, setListState}) => {
   const getFilms = () => {
     let films = JSON.parse(localStorage.getItem('films'));
     setListState(films);
+    return films;
+  }
+
+  //Eliminación de peliculas
+  const deleteFilm = (id) => {
+    let filmList = getFilms();
+    let newFilmList = filmList.filter(film => film.id !== parseInt(id));
+
+    setListState(newFilmList);
+
+    localStorage.setItem('films', JSON.stringify(newFilmList));
   }
 
   return (
@@ -28,7 +39,7 @@ export const Listado = ({listState, setListState}) => {
               <p className='description'>{film.description}</p>
 
               <button className='edit'>Editar</button>
-              <button className='delete'>Borrar</button>
+              <button className='delete' onClick={() => {deleteFilm(film.id)}}>Borrar</button>
             </article>
           );
         }): <h2>No hay peliculas disponibles</h2>
