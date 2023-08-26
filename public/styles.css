@@ -186,6 +186,16 @@ button, input[type='submit'], input[type='button'] {
 }
 /*#endregion*/
 
+/*#region FORMULARIO DE EDICIÓN*/
+#editForm {
+    background: transparent !important;
+}
+
+.cancelar:hover {
+    background: orange;
+}
+/*#endregion*/
+
 /*#region MAQUETACIÓN RESPONSIVE*/
 @media (max-width: 1085px) {
     .content {
@@ -199,3 +209,7 @@ button, input[type='submit'], input[type='button'] {
     }
 }
 /*#endregion*/
+
+.notFound {
+    color: red;
+}
